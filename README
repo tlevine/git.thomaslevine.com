@@ -4,11 +4,35 @@ HOW IT WORKS
 
 git.thomaslevine.com is a super light-weight place for Tom to host git repositories.
 
+Git repositories are located at `/home/$permissions/*/.git`, where the main
+two values for `permissions` are `public` and `private`. For example, these could be
+git repositories.
+
+    /home/public/pickle-warehouse/.git
+    /home/private/taxes-2013/.git
+
+These repositories are non-bare repositories for convenience, but they should be used
+like bare repositories; don't develop on git.thomaslevine.com.
+
+Each of these permissions groups corresponds to a user account with read-only access
+to its own home directory. The public account has no password, so anyone can do this.
+
+    git clone public@git.thomaslevine.com:pickle-warehouse/.git
+
+You can, of course, configure different authentication methods for the non-public users.
+
+They also get served over HTTP at addresses like this.
+
+    git.thomaslevine.com/public/pickle-warehouse
+
+That address would be open to everyone, but you can configure different permissions in
+nginx for other directories.
+
 CONFIGURATION
 
 Install the NetBSD 6.1.3 AMI, and then run `./install`.
 
-RELATED PACKAGES
+RELATED CLIENT PACKAGES
 
-* Repository configurator for the server
+* Repository configurator
 * Smudge and clean filters for the client
