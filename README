@@ -4,12 +4,17 @@ HOW IT WORKS
 
 git.thomaslevine.com is a super light-weight place for Tom to host git repositories.
 
-Git repositories are located at `/home/$permissions/*/.git`, where the main
-two values for `permissions` are `public` and `private`. For example, these could be
-git repositories.
+Git repositories are located at `/home/$permissions/*/.git`. You can have any permissions
+you want. Tom has `public` for things that everyone can see, and he might make other groups
+if he wants to give access to just a few people. Thus, these could be git repositories.
 
     /home/public/pickle-warehouse/.git
-    /home/private/taxes-2013/.git
+    /home/accountant/taxes-2013/.git
+
+There is one special permissions group called `personal`. It is special in that it is
+not a user account, so there's no way to log in as it; it is for things that only Tom should see.
+
+    /home/personal/location-of-buried-treasure/.git
 
 These repositories are non-bare repositories for convenience, but they should be used
 like bare repositories; don't develop on git.thomaslevine.com.
@@ -28,11 +33,36 @@ They also get served over HTTP at addresses like this.
 That address would be open to everyone, but you can configure different permissions in
 nginx for other directories.
 
+Recall that none of these permissions-group user accounts has write access; to write
+to the repositories, you should use the `author` user account, whose home directory is
+`/home`.
+
+    git push author@git.thomaslevine.com/public/pickle-warehouse/.git
+
 CONFIGURATION
 
 Install the NetBSD 6.1.3 AMI, and then run `./install`.
+This will install dependences and run basic configurations.
 
-RELATED CLIENT PACKAGES
+It also provides a helper script for setting permissions.
+This script is stored in /usr/bin/git-permissions.
+When you run this, configurations from /home/.git-permissions
+will be applied.
 
-* Repository configurator
+The .git-permissions file is quite simple; it should look like this.
+
+    public= # no password
+    accountant=h,c2buon2
+
+COLLABORATION: SYNCING WITH OTHER GIT REPOSITORIES
+
+When Tom is collaborating with you, you are likely to clone Tom's repositories and
+vice-versa. Then you're going to want to merge each other's changes.
+git.thomaslevine.com gives write access to only one user, so Tom is not going to
+let you write directly to it; instead, you should serve your git repository somewhere,
+and he'll fetch it.
+
+CREATING REPOSITORIES
+
+* Repository configurator for the client
 * Smudge and clean filters for the client
