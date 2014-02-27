@@ -1,0 +1,14 @@
+This package contains documentation and configuration files for git.thomaslevine.com
+
+HOW IT WORKS
+
+git.thomaslevine.com is a super light-weight place for Tom to host git repositories.
+
+CONFIGURATION
+
+Install the NetBSD 6.1.3 AMI, and then run `./install`.
+
+RELATED PACKAGES
+
+* Repository configurator for the server
+* Smudge and clean filters for the client
