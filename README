@@ -67,6 +67,10 @@ CREATING REPOSITORIES
 * Repository configurator for the client
 * Smudge and clean filters for the client
 
+HELPFUL COMMANDS
+
+    /etc/rc.d/nginx restart && curl localhost || tail  -n1/var/log/nginx/error.log
+
 HELPFUL LINKS
 
 NetBSD
