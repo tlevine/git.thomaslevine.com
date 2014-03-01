@@ -1,11 +1,23 @@
 #!/bin/sh
 set -e
 
-echo 'ACCEPTABLE_LICENSES+= vim-license' >> /etc/mk.conf
+minimal=true
+pkgs='devel/git-base www/nginx'
 
-for pkg in editors/vim shells/tmux devel/git-base www/nginx; do
+# Specify to tmux and vim. Tom likes these, but you don't really need them.
+if ! minimal; then
+  echo 'ACCEPTABLE_LICENSES+= vim-license' >> /etc/mk.conf
+  pkgs="$pkgs editors/vim shells/tmux"
+fi
+
+# Run the install.
+for pkg in $pkgs; do
   (
     cd /usr/pkgsrc/$pkg
     make install
   )
 done
+
+# Configure PAM
+echo '@include    common-auth
+@include    common-account' > /etc/pam.d/nginx
