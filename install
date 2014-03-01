@@ -1,11 +1,20 @@
 #!/bin/sh
 set -e
 
-minimal=true
+# Load the configuration
+if ! ./configure; then
+  echo There was an error in the configuration file
+  exit 1
+fi
+
+# Required packages
 pkgs='devel/git-base www/nginx'
 
-# Specify to tmux and vim. Tom likes these, but you don't really need them.
-if ! minimal; then
+# Optional packages
+# 
+# Tom likes these when he's in a shell,
+# but you don't really need them.
+if optional; then
   echo 'ACCEPTABLE_LICENSES+= vim-license' >> /etc/mk.conf
   pkgs="$pkgs editors/vim shells/tmux"
 fi
