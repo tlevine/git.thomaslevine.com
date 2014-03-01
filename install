@@ -31,3 +31,9 @@ done
 # Configure PAM
 echo '@include    common-auth
 @include    common-account' > /etc/pam.d/nginx
+
+# Configure nginx
+cp /usr/pkg/share/examples/rc.d/nginx /etc/rc.d/nginx
+echo '/var/log/nginx/access.log nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1
+/var/log/nginx/error.log  nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1' >> /etc/newsyslog.conf
+
