@@ -73,12 +73,9 @@ NetBSD
 
     http://wiki.netbsd.org/amazon_ec2/netbsd_in_5_min/
     http://www.netbsd.org/docs/pkgsrc/using.html
-
-Nginx
-
     http://wiki.netbsd.org/tutorials/services/3nmp/
 
-PAM
+Nginx and PAM
 
     http://wiki.netbsd.org/tutorials/openldap_authentication_on_netbsd/
     http://www.justinzane.com/nginx-pam.html
