@@ -17,8 +17,6 @@ echo "
 location /$username {
     root  /home/$username;
     autoindex on;
-    auth_pam                'Log in';
-    auth_pam_service_name   'nginx';
 }
 "
 }

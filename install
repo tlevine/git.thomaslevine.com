@@ -28,10 +28,6 @@ for pkg in $pkgs; do
   )
 done
 
-# Configure PAM
-echo '@include    common-auth
-@include    common-account' > /etc/pam.d/nginx
-
 # Configure nginx
 cp /usr/pkg/share/examples/rc.d/nginx /etc/rc.d/nginx
 echo 'nginx=YES' >> /etc/rc.conf

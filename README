@@ -83,8 +83,9 @@ Nginx
     http://wiki.nginx.org/HttpCoreModule#location
     http://wiki.netbsd.org/tutorials/services/3nmp/
 
-Nginx and PAM
+Nginx and PAM, which I wound up not using
 
     http://wiki.netbsd.org/tutorials/openldap_authentication_on_netbsd/
     http://www.justinzane.com/nginx-pam.html
     http://web.iti.upv.es/~sto/nginx/
+    https://serverfault.com/questions/372719/how-to-use-nginx-pam-module
