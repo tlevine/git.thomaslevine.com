@@ -66,3 +66,17 @@ http {
 " > "$nginx_config_directory"/nginx.conf
 
 /etc/rc.d/nginx start
+
+# Make the tlevine group if it doesn't exist.
+if ! gid=$(groupinfo tlevine | grep ^gid | cut -f2); then
+    gid=888
+    groupadd -g $gid
+fi
+
+# Make the users
+if ! userinfo tlevine; then
+  useradd -m -g $gid -b /home tlevine
+fi
+if ! userinfo _; then
+  useradd -m -g $gid _
+fi
