@@ -81,3 +81,4 @@ fi
 if ! userinfo _; then
   useradd -m -g $gid -b /home _
 fi
+chmod g+w /home/_
