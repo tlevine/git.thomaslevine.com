@@ -52,15 +52,15 @@ http {
     include            $nginx_config_directory/mime.types;
     default_type       application/octet-stream;
     sendfile           on;
-    gzip  i            on;
+    gzip               on;
     keepalive_timeout  65;
     server {
         listen 80;
         server_name localhost;
         include $nginx_config_directory/conf.d/*;
-        location = / {
-            root /share/examples/nginx/html;
-            index index.html index.htm;
+        location / {
+             root /usr/pkg/share/examples/nginx/html;
+             index index.html;
         }
         location ~^/[^/]*/.git/.* {
             # Don't serve these tiny git files.
@@ -68,3 +68,5 @@ http {
     }
 }
 " > "$nginx_config_directory"/nginx.conf
+
+/etc/rc.d/nginx start
