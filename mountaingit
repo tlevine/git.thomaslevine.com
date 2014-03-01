@@ -4,7 +4,7 @@ set -e
 # Helpers
 # =========
 USAGE="$0 [expose|hide] [git repository permissions group (username)]"
-nginx_config_file="/etc/nginx/sites-enabled/$username"
+nginx_config_file="/usr/pkg/etc/nginx/$username"
 
 usage() {
   echo $USAGE

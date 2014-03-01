@@ -39,6 +39,9 @@ echo 'nginx=YES' >> /etc/rc.conf
 echo '/var/log/nginx/access.log nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1
 /var/log/nginx/error.log  nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1' >> /etc/newsyslog.conf
 
+nginx_config_directory=/usr/pkg/etc/nginx
+mv "$nginx_config_directory"/nginx.conf{,.bak}
+mkdir -p "$nginx_config_directory"/conf.d
 echo 
 "user   nginx  nginx;
 worker_processes  1;
@@ -46,11 +49,11 @@ events {
     worker_connections  1024;
 }
 http {
-    include       /usr/pkg/etc/nginx/mime.types;
+    include       $nginx_config_directory/mime.types;
     default_type  application/octet-stream;
     sendfile        on;
     keepalive_timeout  65;
     gzip  on;
-    include /etc/nginx/conf.d/[01]-*;
+    include $nginx_config_directory/conf.d/*;
 }
-" > /etc/nginx.conf
+" > "$nginx_config_directory"/nginx.conf
