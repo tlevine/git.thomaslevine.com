@@ -34,9 +34,23 @@ echo '@include    common-auth
 
 # Configure nginx
 cp /usr/pkg/share/examples/rc.d/nginx /etc/rc.d/nginx
+echo 'nginx=YES' >> /etc/rc.conf
+
 echo '/var/log/nginx/access.log nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1
 /var/log/nginx/error.log  nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1' >> /etc/newsyslog.conf
 
-sed -e '/^.*#/ d' -e '/^ *$/ d' -e 's-share/examples/nginx/html-/home/.root_html-' /usr/pkg/etc/nginx/nginx.conf
-
-
+echo 
+"user   nginx  nginx;
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       /usr/pkg/etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    gzip  on;
+    include /etc/nginx/conf.d/[01]-*;
+}
+" > /etc/nginx.conf

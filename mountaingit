@@ -13,8 +13,6 @@ usage() {
 
 write_nginx_config() {
   username="$1"
-  echo "
-  "
 }
 
 # Receive input
