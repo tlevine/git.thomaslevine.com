@@ -18,6 +18,7 @@ specified.
 Thus, anyone can do this.
 
     git clone _@git.thomaslevine.com:pickle-warehouse/.git
+    # Note: this is the one part that doesn't work yet.
 
 And only Tom can do this.
 
