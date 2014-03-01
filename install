@@ -71,12 +71,13 @@ http {
 if ! gid=$(groupinfo tlevine | grep ^gid | cut -f2); then
     gid=888
     groupadd -g $gid
+    rmdir /home
 fi
 
 # Make the users
 if ! userinfo tlevine; then
-  useradd -m -g $gid -b /home tlevine
+  useradd -m -g $gid -d /home tlevine
 fi
 if ! userinfo _; then
-  useradd -m -g $gid _
+  useradd -m -g $gid -b /home _
 fi
