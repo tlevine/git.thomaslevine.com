@@ -68,3 +68,7 @@ Nginx and PAM, which I wound up not using
     http://www.justinzane.com/nginx-pam.html
     http://web.iti.upv.es/~sto/nginx/
     https://serverfault.com/questions/372719/how-to-use-nginx-pam-module
+
+SSH
+
+    http://gitolite.com/gitolite/glssh.html
