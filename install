@@ -40,10 +40,10 @@ echo '/var/log/nginx/access.log nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIG
 /var/log/nginx/error.log  nginx:nginx 640 7 * 24 Z  /var/run/nginx.pid SIGUSR1' >> /etc/newsyslog.conf
 
 nginx_config_directory=/usr/pkg/etc/nginx
-mv "$nginx_config_directory"/nginx.conf{,.bak}
+mv "$nginx_config_directory"/nginx.conf "$nginx_config_directory"/nginx.conf.bak
 mkdir -p "$nginx_config_directory"/conf.d
-echo 
-"user   nginx  nginx;
+echo "
+user   nginx  nginx;
 worker_processes  1;
 events {
     worker_connections  1024;
