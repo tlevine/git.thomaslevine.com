@@ -13,6 +13,20 @@ usage() {
 
 write_nginx_config() {
   username="$1"
+echo "
+location /$username {
+    root  /home/$username;
+    autoindex on;
+    auth_pam                'Log in';
+    auth_pam_service_name   'nginx';
+}
+location /$username/* {
+    root  /home/$username;
+    autoindex on;
+    auth_pam                'Log in';
+    auth_pam_service_name   'nginx';
+}
+"
 }
 
 # Receive input

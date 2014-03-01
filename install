@@ -49,11 +49,16 @@ events {
     worker_connections  1024;
 }
 http {
-    include       $nginx_config_directory/mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
+    include            $nginx_config_directory/mime.types;
+    default_type       application/octet-stream;
+    sendfile           on;
+    gzip  i            on;
     keepalive_timeout  65;
-    gzip  on;
-    include $nginx_config_directory/conf.d/*;
+    server {
+        listen 80;
+        server_name localhost;
+        include $nginx_config_directory/conf.d/*;
+        # location = /
+    }
 }
 " > "$nginx_config_directory"/nginx.conf
