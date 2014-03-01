@@ -8,7 +8,7 @@ if ! ./configure; then
 fi
 
 # Required packages
-pkgs='security/openssl devel/git-base www/nginx'
+pkgs='devel/git-base www/nginx'
 
 # Optional packages
 # 
