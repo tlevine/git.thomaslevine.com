@@ -52,10 +52,12 @@ http {
     keepalive_timeout  65;
     server {
         listen 80;
-        server_name localhost;
+        server_name git.thomaslevine.com;
         location / {
              root /home;
              index index.html index.htm index.csv index;
+             autoindex on;
+             autoindex_exact_size off;
         }
         location ~^/[^/]*/.git/.* {
             # Don't serve these tiny git files.
