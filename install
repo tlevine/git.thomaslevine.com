@@ -16,7 +16,7 @@ pkgs='security/openssl devel/git-base www/nginx'
 # but you don't really need them.
 if optional; then
   echo 'ACCEPTABLE_LICENSES+= vim-license' >> /etc/mk.conf
-  pkgs="$pkgs editors/vim shells/tmux"
+  pkgs="$pkgs editors/vim shells/tmux net/mosh"
 fi
 
 # Run the install.
