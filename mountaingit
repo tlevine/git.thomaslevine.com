@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+USAGE="$0 [expose|hide] [git repository permissions group (username)]"
+
+cmd="$1"
+if not test "$cmd" = expose || test "$cmd" = hide; then
+  echo $USAGE
+  exit 1
+fi
+
+username="$2"
+# Test if that's a real user
