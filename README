@@ -4,72 +4,50 @@ HOW IT WORKS
 
 git.thomaslevine.com is a super light-weight place for Tom to host git repositories.
 
-Git repositories are located at `/home/$permissions/*/.git`. You can have any permissions
-you want. Tom has `public` for things that everyone can see, and he might make other groups
-if he wants to give access to just a few people. Thus, these could be git repositories.
+Git repositories are located at `/home/*/.git`. Thus, these could be git repositories.
 
-    /home/public/pickle-warehouse/.git
-    /home/accountant/taxes-2013/.git
+    /home/pickle-warehouse/.git
 
-There is one special permissions group called `personal`. It is special in that it is
-not a user account, so there's no way to log in as it; it is for things that only Tom should see.
+There are two user accounts that we care about: tlevine and _. The present package
+doesn't configure SSH login for either user, but the following settings should be
+specified.
 
-    /home/personal/location-of-buried-treasure/.git
+* SSH key only for tlevine
+* no authentication for _
 
-These repositories are non-bare repositories for convenience, but they should be used
-like bare repositories; don't develop on git.thomaslevine.com.
+Thus, anyone can do this.
 
-Each of these permissions groups corresponds to a user account with read-only access
-to its own home directory. The public account has no password, so anyone can do this.
+    git clone _@git.thomaslevine.com:pickle-warehouse/.git
 
-    git clone public@git.thomaslevine.com:pickle-warehouse/.git
+And only Tom can do this.
 
-You can, of course, configure different authentication methods for the non-public users.
+    git push tlevine@git.thomaslevine.com:pickle-warehouse/.git master
 
-They also get served over HTTP at addresses like this.
+There is a post-receive hook that checks out the HEAD of master,
+so a checkout of the "master" branch gets served over HTTP at addresses like this.
 
-    git.thomaslevine.com/public/pickle-warehouse
-
-That address would be open to everyone, but you can configure different permissions in
-nginx for other directories.
-
-Recall that none of these permissions-group user accounts has write access; to write
-to the repositories, you should use the `author` user account, whose home directory is
-`/home`.
-
-    git push author@git.thomaslevine.com/public/pickle-warehouse/.git
+    git.thomaslevine.com/pickle-warehouse
 
 CONFIGURATION
 
 Install the NetBSD 6.1.3 AMI, and then run `./install`.
 This will install dependences and run basic configurations.
 
-It also provides a helper script for setting permissions.
-This script is stored in /usr/bin/git-permissions.
-When you run this, configurations from /home/.git-permissions
-will be applied.
+This command is helpful for debugging nginx configurations. 
 
-The .git-permissions file is quite simple; it should look like this.
-
-    public= # no password
-    accountant=h,c2buon2
+    /etc/rc.d/nginx restart && curl localhost || tail -n1 /var/log/nginx/error.log
 
 COLLABORATION: SYNCING WITH OTHER GIT REPOSITORIES
 
 When Tom is collaborating with you, you are likely to clone Tom's repositories and
 vice-versa. Then you're going to want to merge each other's changes.
 git.thomaslevine.com gives write access to only one user, so Tom is not going to
-let you write directly to it; instead, you should serve your git repository somewhere,
-and he'll fetch it.
+let you write directly to his repository; instead, you should serve your git repository
+somewhere, and he'll fetch it.
 
 CREATING REPOSITORIES
 
-* Repository configurator for the client
-* Smudge and clean filters for the client
 
-HELPFUL COMMANDS
-
-    /etc/rc.d/nginx restart && curl localhost || tail  -n1/var/log/nginx/error.log
 
 HELPFUL LINKS
 
