@@ -5,22 +5,27 @@ set -e
 # =========
 USAGE="$0 [expose|hide] [git repository permissions group (username)]"
 nginx_config_file="/etc/nginx/sites-enabled/$username"
+
+usage() {
+  echo $USAGE
+  exit 1
+}
+
 write_nginx_config() {
   username="$1"
-  echo '
-  '
+  echo "
+  "
 }
+
+# Receive input
+# =========
+cmd="$1"
+username="$2"
 
 # Check input 
 # =========
-cmd="$1"
-if not test "$cmd" = expose || test "$cmd" = hide; then
-  echo $USAGE
-  exit 1
-fi
-
-username="$2"
-# (test whether that's a real user)
+test "$cmd" = expose || test "$cmd" = hide || usage # valid command?
+finger "$username" > /dev/null || usage             # valid user?
 
 # Run
 # =========
