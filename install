@@ -12,6 +12,7 @@ fi
 
 # Run the install.
 for pkg in $pkgs; do
+  pkg_info $(echo $pkg|cut -d/ -f2) > /dev/null ||
   (
     cd /usr/pkgsrc/$pkg
     make install
