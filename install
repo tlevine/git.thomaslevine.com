@@ -53,7 +53,6 @@ http {
     server {
         listen 80;
         server_name localhost;
-        include $nginx_config_directory/conf.d/*;
         location / {
              root /home;
              index index.html index.htm index.csv index;
@@ -65,15 +64,6 @@ http {
 }
 " > "$nginx_config_directory"/nginx.conf
 
-/etc/rc.d/nginx start
-
-# Make the tlevine group if it doesn't exist.
-if ! gid=$(groupinfo tlevine | grep ^gid | cut -f2); then
-    gid=888
-    groupadd -g $gid
-    rmdir /home
-fi
-
 # Make the users
 if ! userinfo tlevine; then
   useradd -m -g $gid -d /home tlevine
@@ -81,4 +71,7 @@ fi
 if ! userinfo _; then
   useradd -m -g $gid -b /home _
 fi
-chmod g+w /home/_
+chown -R tlevine:tlevine /home/_
+chmod -R u+r /home/_
+
+/etc/rc.d/nginx start
