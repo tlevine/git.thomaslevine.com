@@ -20,7 +20,7 @@ location /$username {
     auth_pam                'Log in';
     auth_pam_service_name   'nginx';
 }
-location /$username/* {
+location /$username {
     root  /home/$username;
     autoindex on;
     auth_pam                'Log in';

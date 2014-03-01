@@ -58,7 +58,13 @@ http {
         listen 80;
         server_name localhost;
         include $nginx_config_directory/conf.d/*;
-        # location = /
+        location = / {
+            root /share/examples/nginx/html;
+            index index.html index.htm;
+        }
+        location ~^/[^/]*/.git/.* {
+            # Don't serve these tiny git files.
+        }
     }
 }
 " > "$nginx_config_directory"/nginx.conf
