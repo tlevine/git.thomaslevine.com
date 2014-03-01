@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 
-for pkg in devel/git-base shells/tmux www/nginx; do
+echo 'ACCEPTABLE_LICENSES+= vim-license' >> /etc/mk.conf
+
+for pkg in editors/vim shells/tmux devel/git-base www/nginx; do
   (
     cd /usr/pkgsrc/$pkg
     make install
