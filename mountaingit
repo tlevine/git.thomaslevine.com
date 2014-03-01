@@ -15,7 +15,7 @@ write_nginx_config() {
   username="$1"
 echo "
 location /$username {
-    root  /home/$username;
+    root  /home
     autoindex on;
 }
 "

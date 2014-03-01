@@ -55,8 +55,8 @@ http {
         server_name localhost;
         include $nginx_config_directory/conf.d/*;
         location / {
-             root /usr/pkg/share/examples/nginx/html;
-             index index.html;
+             root /home;
+             index index.html index.htm index.csv index;
         }
         location ~^/[^/]*/.git/.* {
             # Don't serve these tiny git files.
