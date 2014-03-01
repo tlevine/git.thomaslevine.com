@@ -72,3 +72,4 @@ Nginx and PAM, which I wound up not using
 SSH
 
     http://gitolite.com/gitolite/glssh.html
+    https://stackoverflow.com/questions/13318715/how-do-programs-like-gitolite-work
