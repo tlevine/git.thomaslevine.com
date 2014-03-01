@@ -66,3 +66,7 @@ CREATING REPOSITORIES
 
 * Repository configurator for the client
 * Smudge and clean filters for the client
+
+HELPFUL LINKS
+
+http://wiki.netbsd.org/tutorials/openldap_authentication_on_netbsd/
