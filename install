@@ -66,12 +66,14 @@ http {
 
 # Make the users
 if ! userinfo tlevine; then
-  useradd -m -g $gid -d /home tlevine
+  useradd -m -d /home tlevine
 fi
 if ! userinfo _; then
-  useradd -m -g $gid -b /home _
+  useradd -m -b /home _
 fi
-chown -R tlevine:tlevine /home/_
-chmod -R u+r /home/_
+usermod -G _ tlevine
+
+chmod g+wx /home/_
+chmod -R g+r /home/_
 
 /etc/rc.d/nginx start
